@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class TreeAdminController extends CRUDController
 {
-    public function listAction()
+    public function listAction(Request $request): Response
     {
         $request = $this->getRequest();
         if ($listMode = $request->get('_list_mode')) {
