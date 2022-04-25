@@ -6,8 +6,9 @@ use Doctrine\ORM\EntityManager;
 use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class TreeAdminController extends CRUDController
 {
@@ -42,10 +43,8 @@ class TreeAdminController extends CRUDController
         return parent::listAction();
     }
 
-    public function treeDataAction()
+    public function treeDataAction(Request $request): JsonResponse
     {
-        $request = $this->getRequest();
-        
         $doctrine = $this->get('doctrine');
         /** @var EntityManager $em */
         $em = $doctrine->getManagerForClass($this->admin->getClass());
